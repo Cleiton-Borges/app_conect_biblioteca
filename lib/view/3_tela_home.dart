@@ -213,7 +213,7 @@ class _TelaHomeState extends State<TelaHome> {
         child: Container(
           height: 20,
           child: Column(
-            //padding: EdgeInsets.zero,
+            //padding: EdgeInsets.zero, alteracao
             children: <Widget>[
               UserAccountsDrawerHeader(
                 accountEmail: Text("user@mail.com"),
