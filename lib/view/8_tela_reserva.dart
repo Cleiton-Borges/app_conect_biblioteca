@@ -10,7 +10,7 @@ class TelaReserva extends StatefulWidget {
 
 class _TelaReservaState extends State<TelaReserva> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  int _opcaoSelecionada = 3;
+  int _opcaoSelecionada = 2;
 
   void _abrirDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
@@ -26,9 +26,9 @@ class _TelaReservaState extends State<TelaReserva> {
       appBar: AppBar(
         leading: IconButton(
           color: Colors.black,
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.notifications),
           onPressed: () {
-            _abrirDrawerUser();
+            Navigator.popAndPushNamed(context, 'notificacao');
           },
         ),
         backgroundColor: Colors.white,
@@ -40,20 +40,10 @@ class _TelaReservaState extends State<TelaReserva> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            color: Colors.black,
-            icon: Icon(Icons.notifications),
-            onPressed: () {
-              Navigator.popAndPushNamed(context, 'notificacao');
-            },
-          ),
-        ],
       ),
       key: _scaffoldKey,
       body: Stack(children: [
         Container(
-          //margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('lib/images/Livro.png'),
@@ -89,8 +79,7 @@ class _TelaReservaState extends State<TelaReserva> {
 
           if (opcao == 0) Navigator.popAndPushNamed(context, 'home');
           if (opcao == 1) Navigator.popAndPushNamed(context, 'favorito');
-          if (opcao == 2) Navigator.popAndPushNamed(context, 'pesquisa');
-          if (opcao == 4) _abrirDrawer();
+          if (opcao == 3) _abrirDrawer();
         },
         items: [
           BottomNavigationBarItem(
@@ -101,11 +90,6 @@ class _TelaReservaState extends State<TelaReserva> {
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline, color: Colors.black, size: 40),
             label: 'Favorito',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_outlined, color: Colors.black, size: 40),
-            label: 'Pesquisa',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
@@ -132,14 +116,6 @@ class _TelaReservaState extends State<TelaReserva> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.person, color: Colors.black),
-              title: Text("Minha conta"),
-              onTap: () {
-                Navigator.pop(context, 'login');
-                //Navegar para outra página
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.home, color: Colors.black),
               title: Text("Início"),
               onTap: () {
@@ -153,14 +129,6 @@ class _TelaReservaState extends State<TelaReserva> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.popAndPushNamed(context, 'favorito');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.search, color: Colors.black),
-              title: Text("Pesquisar"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.popAndPushNamed(context, 'pesquisa');
               },
             ),
             ListTile(
@@ -202,7 +170,6 @@ class _TelaReservaState extends State<TelaReserva> {
           ],
         ),
       ),
-      drawer: Drawer(),
     );
   }
 }

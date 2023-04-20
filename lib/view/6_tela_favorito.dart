@@ -25,12 +25,12 @@ class _TelaFavoritoState extends State<TelaFavorito> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            color: Colors.black,
-            icon: Icon(Icons.person),
-            onPressed: () {
-              _abrirDrawerUser();
-            },
-          ),
+          color: Colors.black,
+          icon: Icon(Icons.notifications),
+          onPressed: () {
+            Navigator.popAndPushNamed(context, 'notificacao');
+          },
+        ),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Text(
@@ -40,15 +40,6 @@ class _TelaFavoritoState extends State<TelaFavorito> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-          color: Colors.black,
-          icon: Icon(Icons.notifications),
-          onPressed: () {
-            Navigator.popAndPushNamed(context, 'notificacao');
-          },
-        ),
-        ],
       ),
       key: _scaffoldKey,
       body: Stack(
@@ -94,10 +85,8 @@ class _TelaFavoritoState extends State<TelaFavorito> {
           if (opcao == 0)
             Navigator.popAndPushNamed(context, 'home');
           if (opcao == 2)
-            Navigator.popAndPushNamed(context, 'pesquisa');
-          if (opcao == 3)
             Navigator.popAndPushNamed(context, 'reserva');
-          if (opcao == 4) _abrirDrawer();
+          if (opcao == 3) _abrirDrawer();
         },
         items: [
           BottomNavigationBarItem(
@@ -108,11 +97,6 @@ class _TelaFavoritoState extends State<TelaFavorito> {
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline, color: Colors.black, size: 40),
             label: 'Favorito',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_outlined, color: Colors.black, size: 40),
-            label: 'Pesquisa',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
@@ -139,14 +123,6 @@ class _TelaFavoritoState extends State<TelaFavorito> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.person, color: Colors.black),
-              title: Text("Minha conta"),
-              onTap: () {
-                Navigator.pop(context, 'login');
-                //Navegar para outra página
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.home, color: Colors.black),
               title: Text("Início"),
               onTap: () {
@@ -159,14 +135,6 @@ class _TelaFavoritoState extends State<TelaFavorito> {
               title: Text("Favoritos"),
               onTap: () {
                 Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.search, color: Colors.black),
-              title: Text("Pesquisar"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.popAndPushNamed(context, 'pesquisa');
               },
             ),
             ListTile(
@@ -208,9 +176,6 @@ class _TelaFavoritoState extends State<TelaFavorito> {
             ),
           ],
         ),
-      ),
-      drawer: Drawer(
-        
       ),
     );
   }

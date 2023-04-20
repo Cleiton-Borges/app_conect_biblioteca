@@ -25,12 +25,12 @@ class _TelaHomeState extends State<TelaHome> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            color: Colors.black,
-            icon: Icon(Icons.person),
-            onPressed: () {
-              _abrirDrawerUser();
-            },
-          ),
+          color: Colors.black,
+          icon: Icon(Icons.notifications),
+          onPressed: () {
+            Navigator.popAndPushNamed(context, 'notificacao');
+          },
+        ),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Text(
@@ -40,21 +40,11 @@ class _TelaHomeState extends State<TelaHome> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-          color: Colors.black,
-          icon: Icon(Icons.notifications),
-          onPressed: () {
-            Navigator.popAndPushNamed(context, 'notificacao');
-          },
-        ),
-        ],
       ),
       key: _scaffoldKey,
       body: Stack(
         children: [
           Container(
-            //margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('lib/images/Livro.png'),
@@ -93,11 +83,9 @@ class _TelaHomeState extends State<TelaHome> {
 
           if (opcao == 1)
             Navigator.popAndPushNamed(context, 'favorito');
-          if (opcao == 2)
-            Navigator.popAndPushNamed(context, 'pesquisa');
-          if (opcao == 3) 
+          if (opcao == 2) 
             Navigator.popAndPushNamed(context, 'reserva');
-          if (opcao == 4) _abrirDrawer();
+          if (opcao == 3) _abrirDrawer();
         },
         items: [
           BottomNavigationBarItem(
@@ -108,11 +96,6 @@ class _TelaHomeState extends State<TelaHome> {
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline, color: Colors.black, size: 40),
             label: 'Favorito',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_outlined, color: Colors.black, size: 40),
-            label: 'Pesquisa',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
@@ -139,14 +122,6 @@ class _TelaHomeState extends State<TelaHome> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.person, color: Colors.black),
-              title: Text("Minha conta"),
-              onTap: () {
-                Navigator.pop(context, 'login');
-                //Navegar para outra página
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.home, color: Colors.black),
               title: Text("Início"),
               onTap: () {
@@ -159,14 +134,6 @@ class _TelaHomeState extends State<TelaHome> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.popAndPushNamed(context, 'favorito');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.search, color: Colors.black),
-              title: Text("Pesquisar"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.popAndPushNamed(context, 'pesquisa');
               },
             ),
             ListTile(

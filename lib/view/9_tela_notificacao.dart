@@ -171,9 +171,6 @@ class _TelaNotificacaoState extends State<TelaNotificacao> {
           ],
         ),
       ),
-      drawer: Drawer(
-        
-      ),
     );
   }
 }
