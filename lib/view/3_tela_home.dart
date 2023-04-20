@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '0_classe_livros.dart';
+import '1_tela_login.dart';
 
 class TelaHome extends StatefulWidget {
   const TelaHome({super.key});
@@ -166,10 +167,10 @@ class _TelaHomeState extends State<TelaHome> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountEmail: Text("user@gmail.com"),
-              accountName: Text("Seu zé"),
+              accountEmail: Text("pedro@gmail.com"),
+              accountName: Text("Pedro Silva"),
               currentAccountPicture: CircleAvatar(
-                child: Text("SZ"),
+                child: Text("PS"),
               ),
             ),
             ListTile(
@@ -225,23 +226,6 @@ class _TelaHomeState extends State<TelaHome> {
               },
             ),
           ],
-        ),
-      ),
-      drawer: Drawer(
-        child: Container(
-          height: 20,
-          child: Column(
-            //padding: EdgeInsets.zero, alteracao
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountEmail: Text("user@mail.com"),
-                accountName: Text("Seu zé"),
-                currentAccountPicture: CircleAvatar(
-                  child: Text("SZ"),
-                ),
-              ),
-            ]
-          ),
         ),
       ),
     );

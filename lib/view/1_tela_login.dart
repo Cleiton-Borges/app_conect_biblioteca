@@ -130,10 +130,10 @@ class _TelaLoginState extends State<TelaLogin> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                if (email == '' && password == '') {
+                if (email == 'pedro@gmail.com' && password == '1234') {
                   Navigator.pushNamed(context, 'home');
                 } else {
-                  login_e_senhaInvalidos(
+                  avisos(
                       'Usuário ou Senha Inválidos');
                 }
               },
@@ -153,7 +153,7 @@ class _TelaLoginState extends State<TelaLogin> {
       ),
     );
   }
-  login_e_senhaInvalidos(msg) {
+  avisos(msg) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: Duration(seconds: 4),

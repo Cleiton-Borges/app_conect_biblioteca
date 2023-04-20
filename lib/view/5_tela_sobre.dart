@@ -252,8 +252,8 @@ class _TelaSobreState extends State<TelaSobre> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountEmail: Text("user@mail.com"),
-              accountName: Text("Seu zé"),
+              accountEmail: Text("pedro@gmail.com"),
+              accountName: Text("Pedro Silva"),
               currentAccountPicture: CircleAvatar(
                 child: Text("SZ"),
               ),

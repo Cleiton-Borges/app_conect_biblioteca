@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '0_classe_livros.dart';
 
 class TelaFavorito extends StatefulWidget {
   const TelaFavorito({super.key});
@@ -45,20 +46,22 @@ class _TelaFavoritoState extends State<TelaFavorito> {
       body: Stack(
         children: [
           Container(
-            //margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('lib/images/Livro.png'),
                 fit: BoxFit.fill,
               ),
             ),
-            child: Column(
-              children: [
-                SizedBox(height: 2),
+            child: ListView(children: <Widget>[
+            SizedBox(height: 3),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 40,
+                right: 40,
+              ),
+              child: Column(children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 25),
                     Text(
                       'Favoritos',
                       style: TextStyle(
@@ -66,11 +69,266 @@ class _TelaFavoritoState extends State<TelaFavorito> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
+                      textAlign: TextAlign.start,
                     ),
                   ],
                 ),
-              ]
+                SizedBox(
+                  width: 750.0,
+                  height: 2.0,
+                  child: Container(
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Icon(Icons.favorite, 
+                          color: Colors.red, 
+                          size: 20
+                        ),
+                        Container(
+                          height: 250,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                livros[0].imagem,
+                                height: 100,
+                                width: double.infinity,
+                                fit: BoxFit.fill,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      livros[0].titulo,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      livros[0].autor,
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 70),
+                    Column(
+                      children: [
+                        Icon(Icons.favorite, 
+                          color: Colors.red, 
+                          size: 20
+                        ),
+                        Container(
+                          height: 250,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                livros[2].imagem,
+                                height: 100,
+                                width: double.infinity,
+                                fit: BoxFit.fill,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      livros[2].titulo,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      livros[2].autor,
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Icon(Icons.favorite, 
+                          color: Colors.red, 
+                          size: 20
+                        ),
+                        Container(
+                          height: 250,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                livros[4].imagem,
+                                height: 100,
+                                width: double.infinity,
+                                fit: BoxFit.fill,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      livros[4].titulo,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      livros[4].autor,
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 70),
+                    Column(
+                      children: [
+                        Icon(Icons.favorite, 
+                          color: Colors.red, 
+                          size: 20
+                        ),
+                        Container(
+                          height: 250,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(
+                                livros[6].imagem,
+                                height: 100,
+                                width: double.infinity,
+                                fit: BoxFit.fill,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      livros[6].titulo,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      livros[6].autor,
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+              ]),
             ),
+          ]
+          ),
           ),
         ]
       ),
@@ -116,8 +374,8 @@ class _TelaFavoritoState extends State<TelaFavorito> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountEmail: Text("user@mail.com"),
-              accountName: Text("Seu zé"),
+              accountEmail: Text("pedro@gmail.com"),
+              accountName: Text("Pedro Silva"),
               currentAccountPicture: CircleAvatar(
                 child: Text("SZ"),
               ),
