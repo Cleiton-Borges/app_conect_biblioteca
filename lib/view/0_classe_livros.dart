@@ -28,7 +28,7 @@ final List<Livro> livros = [
     imagem: "https://m.media-amazon.com/images/I/61KSQiD6CsL.jpg",
   ),
   Livro(
-    titulo: "O GUARA",
+    titulo: "O GUARANI",
     autor: "José de Alencar",
     imagem: "https://m.media-amazon.com/images/I/7125-MeD+KL.jpg",
   ),

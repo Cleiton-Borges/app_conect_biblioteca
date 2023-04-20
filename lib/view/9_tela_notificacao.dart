@@ -81,7 +81,6 @@ class _TelaNotificacaoState extends State<TelaNotificacao> {
                 ),
                 SizedBox(height: 15),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       height: 250,
@@ -133,10 +132,10 @@ class _TelaNotificacaoState extends State<TelaNotificacao> {
                         ],
                       ),
                     ),
-                    SizedBox(width: 2),
+                    SizedBox(width: 20),
                     Text(
-                      'Caro Cliente.\nSua reserva do livro acaba hoje 20/04/2023!\n' 
-                      'Atente-se ao prazo de devolução.\n Grato!',
+                      'Caro Cliente.\nSua reserva do livro acaba hoje\n20/04/2023!\n' 
+                      'Atente-se ao prazo de devolução.\nGrato!',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -146,6 +145,81 @@ class _TelaNotificacaoState extends State<TelaNotificacao> {
                     ),
                   ],
                 ),
+                SizedBox(height: 15),
+                SizedBox(
+                  width: 750.0,
+                  height: 2.0,
+                  child: Container(
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    Container(
+                      height: 250,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.network(
+                            livros[4].imagem,
+                            height: 100,
+                            width: double.infinity,
+                            fit: BoxFit.fill,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  livros[4].titulo,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  livros[4].autor,
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Text(
+                      'Caro Cliente.\nAcabamos de ter disponivel \no livro' 
+                      '"O Guarani",\nde José de Alencar.\nReserve já!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
                 SizedBox(
                   width: 750.0,
                   height: 2.0,
@@ -157,101 +231,6 @@ class _TelaNotificacaoState extends State<TelaNotificacao> {
             ),
           ]
           ),
-          
-          
-          
-          
-          /*child: Column(children: [
-            SizedBox(height: 10),
-            SizedBox(width: 25),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Notificações',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 750.0,
-              height: 2.0,
-              child: Container(
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(height: 15),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 250,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.network(
-                        livros[0].imagem,
-                        height: 100,
-                        width: double.infinity,
-                        fit: BoxFit.fill,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              livros[0].titulo,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              livros[0].autor,
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(width: 2),
-                Text(
-                  'Caro Cliente.\nSua reserva do livro acaba hoje 20/04/2023!\n' 
-                  'Atente-se ao prazo de devolução.\n Grato!',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.justify,
-                ),
-              ],
-            ),
-          ]),*/
         ),
       ]),
       bottomNavigationBar: BottomNavigationBar(
