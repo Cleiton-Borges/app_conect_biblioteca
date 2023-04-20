@@ -25,12 +25,12 @@ class _TelaReservaState extends State<TelaReserva> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            color: Colors.black,
-            icon: Icon(Icons.person),
-            onPressed: () {
-              _abrirDrawerUser();
-            },
-          ),
+          color: Colors.black,
+          icon: Icon(Icons.person),
+          onPressed: () {
+            _abrirDrawerUser();
+          },
+        ),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Text(
@@ -42,12 +42,12 @@ class _TelaReservaState extends State<TelaReserva> {
         centerTitle: true,
         actions: [
           IconButton(
-          color: Colors.black,
-          icon: Icon(Icons.notifications),
-          onPressed: () {
-            Navigator.popAndPushNamed(context, 'notificacao');
-          },
-        ),
+            color: Colors.black,
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.popAndPushNamed(context, 'notificacao');
+            },
+          ),
         ],
       ),
       key: _scaffoldKey,
@@ -202,9 +202,7 @@ class _TelaReservaState extends State<TelaReserva> {
           ],
         ),
       ),
-      drawer: Drawer(
-        
-      ),
+      drawer: Drawer(),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'package:app_conect_biblioteca/view/3_tela_home.dart';
 import 'package:app_conect_biblioteca/view/4_tela_senha.dart';
 import 'package:app_conect_biblioteca/view/5_tela_sobre.dart';
 import 'package:app_conect_biblioteca/view/6_tela_favorito.dart';
-import 'package:app_conect_biblioteca/view/7_tela_pesquisa.dart';
 import 'package:app_conect_biblioteca/view/8_tela_reserva.dart';
 import 'package:app_conect_biblioteca/view/9_tela_notificacao.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ void main() {
         'senha':(context) => TelaSenha(),
         'sobre':(context) => TelaSobre(),
         'favorito':(context) => TelaFavorito(),
-        'pesquisa':(context) => TelaPesquisa(),
         'reserva':(context) => TelaReserva(),
         'notificacao':(context) => TelaNotificacao(),
       }
