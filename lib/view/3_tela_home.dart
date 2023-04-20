@@ -60,7 +60,7 @@ class _TelaHomeState extends State<TelaHome> {
               ),
               itemCount: livros.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 childAspectRatio: 0.6,
@@ -90,7 +90,7 @@ class _TelaHomeState extends State<TelaHome> {
                           livros[index].imagem,
                           height: 150,
                           width: double.infinity,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                         Padding(
                           padding: EdgeInsets.all(10),

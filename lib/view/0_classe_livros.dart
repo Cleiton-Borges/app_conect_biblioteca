@@ -8,11 +8,6 @@ class Livro {
 
 final List<Livro> livros = [
   Livro(
-    titulo: "HARRY POTTER E A PEDRA FILOSOFAL",
-    autor: "J.K. Rowling, Lia Wyler",
-    imagem: "https://m.media-amazon.com/images/I/81ibfYk4qmL.jpg",
-  ),
-  Livro(
     titulo: "O REI LEÃO",
     autor: "Elizabeth Rudnick, Raquel Nakasone",
     imagem: "https://m.media-amazon.com/images/I/812jgrk3q+L.jpg",
@@ -51,5 +46,10 @@ final List<Livro> livros = [
     titulo: "INTRODUÇÃO A LINGUAGEM SQL",
     autor: "Thomas Nield",
     imagem: "https://m.media-amazon.com/images/I/711siL1zU1L.jpg",
+  ),
+  Livro(
+    titulo: "A CULPA É DAS ESTRELAS",
+    autor: "John Green",
+    imagem: "https://m.media-amazon.com/images/I/61oIS8ewc9L.jpg",
   ),
 ];

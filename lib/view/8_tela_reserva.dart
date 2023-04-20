@@ -57,7 +57,7 @@ class _TelaReservaState extends State<TelaReserva> {
               children: [
                 SizedBox(width: 25),
                 Text(
-                  'MinhasReservas',
+                  'Minhas Reservas',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
