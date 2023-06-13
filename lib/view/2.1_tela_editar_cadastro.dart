@@ -1,17 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Controller/login_controller.dart';
 import '../Controller/tela_controller.dart';
+import '../Controller/usuario_controller.dart';
 
-class TelaCadastro extends StatefulWidget {
-  const TelaCadastro({super.key});
+
+class TelaEditarCadastro extends StatefulWidget {
+  const TelaEditarCadastro({super.key});
 
   @override
-  State<TelaCadastro> createState() => _TelaCadastroState();
+  State<TelaEditarCadastro> createState() => _TelaEditarCadastroState();
 }
 
-class _TelaCadastroState extends State<TelaCadastro> {
+class _TelaEditarCadastroState extends State<TelaEditarCadastro> {
+  User? id = FirebaseAuth.instance.currentUser;
   bool _mostraSenha = false;
   var txtNome = TextEditingController();
   var txtCPF = TextEditingController();
@@ -21,8 +26,6 @@ class _TelaCadastroState extends State<TelaCadastro> {
   var txtRua = TextEditingController();
   var txtNumero = TextEditingController();
   var txtBairro = TextEditingController();
-  var txtEmail = TextEditingController();
-  var txtSenha = TextEditingController();
 
   @override
   void initState() {
@@ -58,22 +61,9 @@ class _TelaCadastroState extends State<TelaCadastro> {
               SizedBox(height: 2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),                
+                children: [             
                   Text(
-                    ' /  Cadastro',
+                    'Editar Cadastro',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -206,89 +196,59 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 16),
               Row(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: TextField(
-                      controller: txtEmail,
-                      decoration: InputDecoration(
-                        labelText: 'E-mail',
-                        fillColor: Colors.white.withOpacity(0.5),
-                        filled: true,
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: TextFormField(
-                      controller: txtSenha,
-                      decoration: InputDecoration(
-                        hintText: 'Senha',
-                        hintStyle: TextStyle(color: Color.fromARGB(76, 37, 36, 36)),
-                        fillColor: Colors.white.withOpacity(0.5),
-                        filled: true,
-                        prefixIcon: Icon(Icons.lock),
-                        border: OutlineInputBorder(),
-                        suffixIcon: GestureDetector(
-                          child: Icon(
-                            _mostraSenha == false
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onTap: () {
-                            setState(() {
-                              _mostraSenha = !_mostraSenha;
-                            });
-                          },
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      if (FirebaseAuth.instance.currentUser!.email == 'admin@gmail.com') {
+                        Navigator.pushNamed(context, 'homeAdmin');
+                      } else {
+                        Navigator.pushNamed(context, 'home');
+                      }
+                    },
+                    child: Text(
+                      'Voltar',
+                      style: GoogleFonts.lilitaOne(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
                         ),
                       ),
-                      obscureText: _mostraSenha == false ? true : false,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(178, 220, 224, 226),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.black, width: 1),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 50,),
+                  ElevatedButton(
+                    onPressed: () {
+                      UsuarioController().atualizarPerfil(context, id, txtNome.text);
+                    },
+                    child: Text(
+                      'Salvar',
+                      style: GoogleFonts.lilitaOne(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(178, 220, 224, 226),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.black, width: 1),
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                LoginController().criarConta(
-                  context,
-                  txtNome.text,
-                  txtCPF.text,
-                  txtTelefone.text,
-                  txtCep.text,
-                  txtCidade.text,
-                  txtRua.text,
-                  txtNumero.text,
-                  txtBairro.text,
-                  txtEmail.text,
-                  txtSenha.text,
-                );
-              },
-              child: Text(
-                'Cadastrar',
-                style: GoogleFonts.lilitaOne(
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(178, 220, 224, 226),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(color: Colors.black, width: 1),
-                ),
-              ),
-            ),
             ],
           ),
         ),

@@ -1,33 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TelaSenha extends StatelessWidget {
+import '../Controller/login_controller.dart';
+import '../Controller/tela_controller.dart';
+
+class TelaSenha extends StatefulWidget {
   const TelaSenha({super.key});
+
+  @override
+  State<TelaSenha> createState() => _TelaSenhaState();
+}
+
+class _TelaSenhaState extends State<TelaSenha> {
+  
+  var txtEmailEsqueceuSenha = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Conect Biblioteca',
-            style: GoogleFonts.lilitaOne(
-              textStyle: TextStyle(color: Colors.black, fontSize: 30),
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Conect Biblioteca',
+          style: GoogleFonts.lilitaOne(
+            textStyle: TextStyle(color: Colors.black, fontSize: 30),
           ),
-          centerTitle: true,
         ),
-        body: Container(
+        centerTitle: true,
+      ),
+      body: BackgroundImage(
+        imagePath: 'lib/images/Livro.png',
+        child: Container(
           padding: EdgeInsets.only(
             left: 40,
             right: 40,
-          ),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/images/Livro.png'),
-              fit: BoxFit.fill,
-            ),
           ),
           child: ListView(
             children: <Widget>[
@@ -97,6 +104,7 @@ class TelaSenha extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: TextFormField(
+                    controller: txtEmailEsqueceuSenha,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: 'example@email.com',
@@ -113,7 +121,12 @@ class TelaSenha extends StatelessWidget {
               SizedBox(height: 20),
               Container(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    LoginController().esqueceuSenha(
+                      context,
+                      txtEmailEsqueceuSenha.text,
+                    );
+                  },
                   child: Text('Enviar'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.blueAccent,
@@ -128,6 +141,8 @@ class TelaSenha extends StatelessWidget {
               SizedBox(height: 16),
             ],
           ),
-        ));
+        )
+      )
+    );
   }
 }

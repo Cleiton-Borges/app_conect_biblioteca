@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "769071272569",
+    "project_id": "app-conect-biblioteca",
+    "storage_bucket": "app-conect-biblioteca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769071272569:android:00055b34a3ed189fdcfaa8",
+        "android_client_info": {
+          "package_name": "com.example.app_conect_biblioteca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769071272569-vmgbe8qkiujq3jq2065dpvgmqvi3pprj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvBAw7EXwxLtUsjobTqf2ISa7A-vjPutE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769071272569-vmgbe8qkiujq3jq2065dpvgmqvi3pprj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Controller/login_controller.dart';
+
 class TelaLogin extends StatefulWidget {
   const TelaLogin({super.key});
   @override
@@ -9,8 +11,13 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   bool _mostraSenha = false;
-  String email = '';
-  String password = '';
+  var txtEmail = TextEditingController();
+  var txtSenha = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +45,7 @@ class _TelaLoginState extends State<TelaLogin> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextFormField(
-                onChanged: (text) {
-                  email = text;
-                },
+                controller: txtEmail,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: 'example@email.com',
@@ -66,9 +71,7 @@ class _TelaLoginState extends State<TelaLogin> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: TextFormField(
-                onChanged: (text) {
-                  password = text;
-                },
+                controller: txtSenha,
                 decoration: InputDecoration(
                   hintText: 'Senha',
                   hintStyle: TextStyle(color: Color.fromARGB(76, 37, 36, 36)),
@@ -130,12 +133,11 @@ class _TelaLoginState extends State<TelaLogin> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                if (email == 'pedro@gmail.com' && password == '1234') {
-                  Navigator.pushNamed(context, 'home');
-                } else {
-                  avisos(
-                      'Usuário ou Senha Inválidos');
-                }
+                LoginController().login(
+                  context,
+                  txtEmail.text,
+                  txtSenha.text,
+                );
               },
               child: Text('Entrar'),
               style: ElevatedButton.styleFrom(
@@ -150,18 +152,6 @@ class _TelaLoginState extends State<TelaLogin> {
             SizedBox(height: 16),
           ],
         ),
-      ),
-    );
-  }
-  avisos(msg) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: Duration(seconds: 4),
-        content: Text(
-          msg,
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.blueGrey.shade50,
       ),
     );
   }

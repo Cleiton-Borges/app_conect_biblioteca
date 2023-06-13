@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../Controller/tela_controller.dart';
 
 class TelaSobre extends StatefulWidget {
   const TelaSobre({super.key});
@@ -15,41 +18,16 @@ class _TelaSobreState extends State<TelaSobre> {
   void _abrirDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
   }
-
-  void _abrirDrawerUser() {
-    _scaffoldKey.currentState!.openDrawer();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          color: Colors.black,
-          icon: Icon(Icons.notifications),
-          onPressed: () {
-            Navigator.popAndPushNamed(context, 'notificacao');
-          },
-        ),
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Conect Biblioteca',
-          style: GoogleFonts.lilitaOne(
-            textStyle: TextStyle(color: Colors.black, fontSize: 30),
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: MyAppBar(),
+      endDrawer: buildEndDrawer(context),
       key: _scaffoldKey,
-      body: Stack(children: [
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/images/Livro.png'),
-              fit: BoxFit.fill,
-            ),
-          ),
+      body: BackgroundImage(
+        imagePath: 'lib/images/Livro.png', 
+        child:Container(
           child: ListView(children: <Widget>[
             SizedBox(height: 3),
             Padding(
@@ -207,7 +185,7 @@ class _TelaSobreState extends State<TelaSobre> {
             ),
           ]),
         ),
-      ]),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _opcaoSelecionada,
@@ -216,8 +194,12 @@ class _TelaSobreState extends State<TelaSobre> {
             _opcaoSelecionada = opcao;
           });
           
-          if (opcao == 0) 
-            Navigator.popAndPushNamed(context, 'home');
+          if (opcao == 0)
+            if (FirebaseAuth.instance.currentUser!.email == 'admin@gmail.com') {
+              Navigator.popAndPushNamed(context, 'homeAdmin');
+            } else {
+              Navigator.popAndPushNamed(context, 'home');
+            }
           if (opcao == 1) 
             Navigator.popAndPushNamed(context, 'favorito');
           if (opcao == 2) 
@@ -246,72 +228,6 @@ class _TelaSobreState extends State<TelaSobre> {
             backgroundColor: Colors.white,
           ),
         ],
-      ),
-      endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountEmail: Text("pedro@gmail.com"),
-              accountName: Text("Pedro Silva"),
-              currentAccountPicture: CircleAvatar(
-                child: Text("SZ"),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home, color: Colors.black),
-              title: Text("Início"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.popAndPushNamed(context, 'home');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.favorite, color: Colors.black),
-              title: Text("Favoritos"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.popAndPushNamed(context, 'favorito');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.menu_book_outlined, color: Colors.black),
-              title: Text("Minhas Reservas"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.popAndPushNamed(context, 'reserva');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.notifications, color: Colors.black),
-              title: Text("Notificações"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.popAndPushNamed(context, 'notificacao');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.logout, color: Colors.black),
-              title: Text("Sair"),
-              onTap: () {
-                Navigator.popAndPushNamed(context, 'login');
-              },
-            ),
-            SizedBox(
-              width: 20.0,
-              height: 2.0,
-              child: Container(
-                color: Colors.black,
-              ),
-            ),
-            ListTile(
-              title: Text("Sobre Conect Biblioteca"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
       ),
     );
   }

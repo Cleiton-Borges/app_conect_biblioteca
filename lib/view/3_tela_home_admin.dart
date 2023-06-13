@@ -1,25 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Controller/favoritos_controller.dart';
+import '../Controller/livros_controller.dart';
+import '../Controller/login_controller.dart';
 import '../Controller/tela_controller.dart';
-class TelaFavorito extends StatefulWidget {
-  const TelaFavorito({super.key});
+import '../model/livros.dart';
+import '0_classe_livros.dart';
+import '1_tela_login.dart';
+
+class TelaHomeAdmin extends StatefulWidget {
+  const TelaHomeAdmin({super.key});
 
   @override
-  State<TelaFavorito> createState() => _TelaFavoritoState();
+  State<TelaHomeAdmin> createState() => _TelaHomeAdminState();
 }
 
-class _TelaFavoritoState extends State<TelaFavorito> {
+class _TelaHomeAdminState extends State<TelaHomeAdmin> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  int _opcaoSelecionada = 1;
-  final List<bool> _favoritos = [];
+  int _opcaoSelecionada = 0;
+  var txtimagem = TextEditingController();
+  var txttitulo = TextEditingController();
+  var txtautor = TextEditingController();
 
   void _abrirDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +35,7 @@ class _TelaFavoritoState extends State<TelaFavorito> {
       body: BackgroundImage(
         imagePath: 'lib/images/Livro.png',
         child: StreamBuilder<QuerySnapshot>(
-          stream: FavoritosController().listar().snapshots(),
+          stream: LivrosController().listarAdmin().snapshots(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -44,7 +50,11 @@ class _TelaFavoritoState extends State<TelaFavorito> {
                 final dados = snapshot.requireData;
                 if (dados.size > 0) {
                   return GridView.builder(
-                    padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+                    padding: EdgeInsets.only(
+                      top: 10,
+                      left: 15,
+                      right: 15
+                    ),
                     itemCount: dados.size,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -55,12 +65,16 @@ class _TelaFavoritoState extends State<TelaFavorito> {
                     itemBuilder: (context, index) {
                       String id = dados.docs[index].id;
                       dynamic item = dados.docs[index].data();
-                      if (_favoritos.length <= index) {
-                        _favoritos.add(
-                            true); // Inicializa o estado do favorito para cada livro
-                      }
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                            txtimagem.text = item['imagem'];
+                            txttitulo.text = item['titulo'];
+                            txtautor.text = item['autor'];
+                            salvarLivro(context, docId: id);
+                          },
+                          onLongPress: () {
+                            LivrosController().excluir(context, id);
+                          },
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -79,7 +93,7 @@ class _TelaFavoritoState extends State<TelaFavorito> {
                             children: [
                               Image.network(
                                 item['imagem'],
-                                height: 150,
+                                height: 170,
                                 width: double.infinity,
                                 fit: BoxFit.fill,
                               ),
@@ -106,38 +120,26 @@ class _TelaFavoritoState extends State<TelaFavorito> {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _favoritos[index] = !_favoritos[
-                                              index]; // Altera o estado do favorito para o livro correspondente
-                                        });
-                                        FavoritosController().excluir(context, id);
-                                      },
-                                      icon: Icon(Icons.favorite, color: Colors.red,),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ],
                           ),
                         ),
-                      );
+                      ); 
                     },
                   );
                 } else {
                   return Center(
-                    child: Text('Nenhum livro encontrado.'),
+                    child: Text('Nenhuma tarefa encontrada.'),
                   );
                 }
             }
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          salvarLivro(context);
+        },
+        child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -147,13 +149,9 @@ class _TelaFavoritoState extends State<TelaFavorito> {
             _opcaoSelecionada = opcao;
           });
 
-          if (opcao == 0)
-            if (FirebaseAuth.instance.currentUser!.email == 'admin@gmail.com') {
-              Navigator.popAndPushNamed(context, 'homeAdmin');
-            } else {
-              Navigator.popAndPushNamed(context, 'home');
-            }
-          if (opcao == 2)
+          if (opcao == 1)
+            Navigator.popAndPushNamed(context, 'favorito');
+          if (opcao == 2) 
             Navigator.popAndPushNamed(context, 'reserva');
           if (opcao == 3) _abrirDrawer();
         },
@@ -180,6 +178,92 @@ class _TelaFavoritoState extends State<TelaFavorito> {
           ),
         ],
       ),
+
+    );
+  }
+  //
+  // ADICIONAR LIVROS
+  //
+  void salvarLivro(context, {docId}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: Text("Adicionar Livros"),
+          content: SizedBox(
+            height: 250,
+            width: 300,
+            child: Column(
+              children: [
+                TextField(
+                  controller: txtimagem,
+                  decoration: InputDecoration(
+                    labelText: 'URL da Imagem',
+                    prefixIcon: Icon(Icons.menu_book_outlined),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextField(
+                  controller: txttitulo,
+                  decoration: InputDecoration(
+                    labelText: 'Titulo do Livro',
+                    prefixIcon: Icon(Icons.menu_book_outlined),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextField(
+                  controller: txtautor,
+                  decoration: InputDecoration(
+                    labelText: 'Autor do Livro',
+                    prefixIcon: Icon(Icons.person),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+          actions: [
+            TextButton(
+              child: Text("fechar"),
+              onPressed: () {
+                txtimagem.clear();
+                txttitulo.clear();
+                txtautor.clear();
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              child: Text("adicionar"),
+              onPressed: () {
+                var l = Livro(
+                  LoginController().idUsuario(),
+                  txtimagem.text,
+                  txttitulo.text,
+                  txtautor.text,
+                );
+                txtimagem.clear();
+                txttitulo.clear();
+                txtautor.clear();
+                if (docId == null) {
+                  //
+                  // ADICIONAR LIVRO
+                  //
+                  LivrosController().adicionar(context, l);
+                } else {
+                  //
+                  // ATUALIZAR LIVRO
+                  //
+                  LivrosController().atualizar(context, docId, l);
+                }
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
