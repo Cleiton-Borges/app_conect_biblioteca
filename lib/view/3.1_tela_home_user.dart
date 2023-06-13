@@ -80,9 +80,9 @@ class _TelaHomeUserState extends State<TelaHomeUser> {
                     });
                   },
                   icon: Icon(
-                    orderByTitulo ? Icons.arrow_downward : Icons.arrow_upward,
+                    orderByTitulo ? Icons.arrow_downward : Icons.sort_by_alpha_outlined,
                   ),
-                  label: orderByTitulo ? Text('A-Z') : Text('Z-A'),
+                  label: orderByTitulo ? Text('A-Z') : Text('Ordernar de A-Z'),
                 ),
               ],
             ),
@@ -269,7 +269,8 @@ class _TelaHomeUserState extends State<TelaHomeUser> {
     );
   }
   listaPesquisa(pesquisa) {
-    Query query = LivrosController().pesquisarLivros(pesquisa);
+    String pesquisaUpperCase = pesquisa.toUpperCase();
+    Query query = LivrosController().pesquisarLivros(pesquisaUpperCase);
 
     if ((orderByTitulo) && (pesquisa == '')) {
       query = query.orderBy('titulo');
