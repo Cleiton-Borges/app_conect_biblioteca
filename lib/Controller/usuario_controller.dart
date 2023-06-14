@@ -27,17 +27,22 @@ class UsuarioController {
   Future atualizarPerfil(context, uid, nome) async {
     String docId = '';
     await FirebaseFirestore.instance
-    .collection('usuarios')
-    .where('uid', isEqualTo: LoginController().idUsuario())
-    .get()
-    .then((resultado) {
-      docId = resultado.docs[0].id.toString();
-    },);
-
-    FirebaseFirestore.instance.
-    collection('usuarios')
-    .doc(docId)
-    .update({'nome': nome,}
+        .collection('usuarios')
+        .where('uid', isEqualTo: LoginController().idUsuario())
+        .get()
+        .then(
+      (resultado) {
+        docId = resultado.docs[0].id.toString();
+      },
     );
+
+    FirebaseFirestore.instance
+        .collection('usuarios')
+        .doc(docId)
+        .update({
+          'nome': nome,
+        })
+        .then((value) => sucesso(context, 'Nome atualizado com sucesso'))
+        .catchError((e) => erro(context, 'Não foi possível atualizar seu nome.'));
   }
 }

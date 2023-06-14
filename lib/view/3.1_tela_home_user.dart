@@ -88,7 +88,6 @@ class _TelaHomeUserState extends State<TelaHomeUser> {
             ),
             Expanded(
               flex: 3,
-              //child: Text('Nenhum Livro Encontrado')
               child: Container(
                 child: (() {
                   if (_pesquisarTitulo == '') {
@@ -99,7 +98,9 @@ class _TelaHomeUserState extends State<TelaHomeUser> {
                 })(),
               ),
             )
-          ])),
+          ]
+        )
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _opcaoSelecionada,
